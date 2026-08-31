@@ -10,6 +10,8 @@ interface AffiliateMe {
   status: string; total_referrals: number;
   pending_earnings_ngn: number; approved_earnings_ngn: number; total_paid_ngn: number;
   can_request_payout: boolean; min_payout_ngn: number;
+  processing_fee_flat_ngn: number; processing_fee_pct: number;
+  payout_fee_ngn: number; payout_net_ngn: number;
 }
 
 interface Earning {
@@ -163,6 +165,14 @@ export default function AffiliateDashboard() {
             <div>
               <p className="text-sm font-semibold">Request Payout</p>
               <p className="text-xs text-gray-400 mt-0.5">Minimum ₦{me.min_payout_ngn.toLocaleString()} · Paid manually to your bank account</p>
+              {me.can_request_payout && (
+                <p className="text-xs text-gray-500 mt-1">
+                  Gross: <span className="text-white">₦{me.pending_earnings_ngn.toLocaleString()}</span>
+                  {" · "}Fee: <span className="text-red-400">−₦{me.payout_fee_ngn.toLocaleString()}</span>
+                  {" · "}You receive: <span className="text-green-400 font-semibold">₦{me.payout_net_ngn.toLocaleString()}</span>
+                </p>
+              )}
+              <p className="text-xs text-gray-600 mt-0.5">Processing fee: ₦150 + 2% deducted to cover transfer charges</p>
               {payoutMsg && <p className={`text-xs mt-1 ${payoutMsg.startsWith("✅") ? "text-green-400" : "text-red-400"}`}>{payoutMsg}</p>}
             </div>
             <button
