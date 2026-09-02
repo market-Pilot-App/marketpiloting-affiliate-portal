@@ -194,22 +194,7 @@ export default function AffiliatePage() {
                 <p className="text-xs text-gray-600 mt-1">This becomes your promo link</p>
               </div>
               <div className="border-t border-gray-800 pt-3">
-                <label className="flex items-start gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={agreedToTerms}
-                    onChange={(e) => setAgreedToTerms(e.target.checked)}
-                    className="mt-0.5 w-4 h-4 rounded accent-indigo-500 flex-shrink-0"
-                  />
-                  <span className="text-xs text-gray-400 leading-relaxed">
-                    I have read and agree to the{" "}
-                    <a href="https://www.marketpiloting.com/terms#affiliate" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:underline">Affiliate Terms</a>
-                    {" "}and{" "}
-                    <a href="https://www.marketpiloting.com/privacy" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:underline">Privacy Policy</a>.
-                    I understand commissions are paid on the first confirmed, non-refunded payment per referred client only and earnings are not guaranteed.
-                  </span>
-                </label>
-              </div>
+                <p className="text-xs text-gray-500 mb-3">Bank details — optional now, required before payout</p>
                 {[
                   { key: "bank_name", label: "Bank Name", placeholder: "e.g. GTBank" },
                   { key: "account_number", label: "Account Number", placeholder: "0123456789", inputMode: "numeric" as const },
@@ -226,6 +211,23 @@ export default function AffiliatePage() {
                     />
                   </div>
                 ))}
+              </div>
+              <div className="border-t border-gray-800 pt-3">
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={agreedToTerms}
+                    onChange={(e) => setAgreedToTerms(e.target.checked)}
+                    className="mt-0.5 w-4 h-4 rounded accent-indigo-500 flex-shrink-0"
+                  />
+                  <span className="text-xs text-gray-400 leading-relaxed">
+                    I have read and agree to the{" "}
+                    <a href="https://www.marketpiloting.com/terms#affiliate" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:underline">Affiliate Terms</a>
+                    {" "}and{" "}
+                    <a href="https://www.marketpiloting.com/privacy" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:underline">Privacy Policy</a>.
+                    I understand commissions are paid on the first confirmed, non-refunded payment per referred client only and earnings are not guaranteed.
+                  </span>
+                </label>
               </div>
             </>
           )}
