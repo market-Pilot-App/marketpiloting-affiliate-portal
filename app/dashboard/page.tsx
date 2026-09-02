@@ -157,7 +157,7 @@ export default function AffiliateDashboard() {
               {copied ? "✓ Copied!" : "Copy Link"}
             </button>
           </div>
-          <p className="text-xs text-indigo-400 mt-2">Share this link — anyone who signs up gets 5% off, you earn 10% commission.</p>
+          <p className="text-xs text-indigo-400 mt-2">Share this link — anyone who signs up gets 5% off, you earn 10% commission on their first payment.</p>
         </div>
 
         {/* Stats grid */}
@@ -228,7 +228,7 @@ export default function AffiliateDashboard() {
             <div className="space-y-3 text-gray-400">
               {[
                 { n: "1", text: <>Share your link and anyone who signs up gets <strong className="text-white">5% off</strong> their plan</> },
-                { n: "2", text: <>When they pay, you earn <strong className="text-green-400">10% commission</strong> automatically</> },
+                { n: "2", text: <>When their first payment clears, you earn <strong className="text-green-400">10% commission</strong> (first payment only)</> },
                 { n: "3", text: <>Once you hit ₦{me.min_payout_ngn.toLocaleString()}, request a payout → we transfer to your bank</> },
                 { n: "4", text: <>Payouts processed within <strong className="text-white">3 business days</strong></> },
               ].map(({ n, text }) => (
@@ -240,7 +240,7 @@ export default function AffiliateDashboard() {
             </div>
             <div className="mt-4 pt-4 border-t border-gray-800">
               <p className="text-xs text-gray-500">Your ref code: <span className="font-mono text-gray-300 bg-gray-800 px-2 py-0.5 rounded">{me.ref_code}</span></p>
-              <p className="text-xs text-gray-600 mt-1">Commission on first payment only</p>
+              <p className="text-xs text-gray-600 mt-1">Commission paid on confirmed, non-refunded subscriptions · <a href="https://www.marketpiloting.com/terms#affiliate" target="_blank" rel="noopener noreferrer" className="text-indigo-500 hover:underline">Affiliate Terms</a></p>
             </div>
           </div>
         )}
@@ -393,7 +393,23 @@ export default function AffiliateDashboard() {
           </div>
         )}
 
-        <div className="pb-6" />
+        <div className="pb-2" />
+
+        {/* Legal footer */}
+        <div className="border-t border-gray-800 pt-4 pb-6">
+          <p className="text-xs text-gray-600 leading-relaxed text-center">
+            Commissions are paid on the first confirmed, non-refunded payment per referred client only. Earnings are not guaranteed.
+            Programme terms may be updated with 14 days&apos; notice. You are responsible for any taxes on your earnings.
+            MarketPilot&apos;s liability is limited to confirmed commissions shown on your dashboard.{" "}
+            <a href="https://www.marketpiloting.com/terms#affiliate" target="_blank" rel="noopener noreferrer" className="text-indigo-500 hover:underline">
+              Full Affiliate Terms
+            </a>
+            {" "}·{" "}
+            <a href="https://www.marketpiloting.com/privacy" target="_blank" rel="noopener noreferrer" className="text-indigo-500 hover:underline">
+              Privacy Policy
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   );

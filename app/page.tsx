@@ -17,6 +17,7 @@ export default function AffiliatePage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
 
@@ -145,7 +146,7 @@ export default function AffiliatePage() {
       <div className="w-full max-w-sm">
         <div className="text-center mb-6">
           <h1 className="text-2xl font-bold text-white">MarketPilot Affiliates</h1>
-          <p className="text-gray-400 mt-1 text-sm">Earn 10% commission on every referral</p>
+          <p className="text-gray-400 mt-1 text-sm">Earn 10% commission on every first payment</p>
         </div>
 
         <div className="bg-gray-900 rounded-2xl p-6 space-y-4">
@@ -193,7 +194,22 @@ export default function AffiliatePage() {
                 <p className="text-xs text-gray-600 mt-1">This becomes your promo link</p>
               </div>
               <div className="border-t border-gray-800 pt-3">
-                <p className="text-xs text-gray-500 mb-3">Bank details — optional now, required before payout</p>
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={agreedToTerms}
+                    onChange={(e) => setAgreedToTerms(e.target.checked)}
+                    className="mt-0.5 w-4 h-4 rounded accent-indigo-500 flex-shrink-0"
+                  />
+                  <span className="text-xs text-gray-400 leading-relaxed">
+                    I have read and agree to the{" "}
+                    <a href="https://www.marketpiloting.com/terms#affiliate" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:underline">Affiliate Terms</a>
+                    {" "}and{" "}
+                    <a href="https://www.marketpiloting.com/privacy" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:underline">Privacy Policy</a>.
+                    I understand commissions are paid on the first confirmed, non-refunded payment per referred client only and earnings are not guaranteed.
+                  </span>
+                </label>
+              </div>
                 {[
                   { key: "bank_name", label: "Bank Name", placeholder: "e.g. GTBank" },
                   { key: "account_number", label: "Account Number", placeholder: "0123456789", inputMode: "numeric" as const },
@@ -218,11 +234,18 @@ export default function AffiliatePage() {
 
           <button
             onClick={handleSubmit}
-            disabled={loading || !form.email || !form.password || (mode === "register" && (!form.name || !form.ref_code))}
+            disabled={loading || !form.email || !form.password || (mode === "register" && (!form.name || !form.ref_code || !agreedToTerms))}
             className="w-full py-4 bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition text-base"
           >
             {loading ? "Please wait…" : mode === "login" ? "Sign In →" : "Create Account →"}
           </button>
+
+          {mode === "register" && (
+            <p className="text-xs text-gray-600 text-center leading-relaxed">
+              10% commission on first payment per referral only. Earnings not guaranteed.{" "}
+              <a href="https://www.marketpiloting.com/terms#affiliate" target="_blank" rel="noopener noreferrer" className="text-indigo-500 hover:underline">Affiliate Terms</a>
+            </p>
+          )}
         </div>
       </div>
     </div>
